@@ -13,8 +13,10 @@ module Cal where
   --
   ---------------------------
 
-  zellers day month year = 
-    (((day + ((26 * (month + 1)) / 10).floor + year + (year / 4).floor + (6 * (year/100).floor) + (year/400).floor) % 7) + 6) % 7
+  -- zellers day month year = (((day + floor ((26 * (month + 1)) / 10) + year + floor (year / 4) + (6 * floor (year/100)) + floor (year/400)) `mod` 7) + 6) `mod` 7
+  -- zellers :: Int -> Int -> Int -> Int
+  zellers :: (RealFrac a1, RealFrac a1, RealFrac a1) => a1 -> a1 -> a1 -> a1
+  zellers day month year = (((day + floor ((26 * (month + 1)) / 10) + year + floor (year / 4) + (6 * floor (year/100)) + floor (year/400)) `mod` 7) + 6) `mod` 7
 
   -- dayOfTheWeek day month year
   --   | month <= 2 = zellers day (month + 12) (year - 1)

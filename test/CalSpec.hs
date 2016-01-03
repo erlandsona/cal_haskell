@@ -4,55 +4,28 @@ import Test.Hspec
 import Cal
 
 main :: IO ()
-main = hspec $ do
+main = hspec spec
+
+spec = parallel $ do
   describe "Cal" $ do
     describe "#zellers" $ do
-      def test_init_day_saves_values
-        d = Day.new(1, 1, 2012)
-        assert_equal 1, d.day
-        assert_equal 1, d.month
-        assert_equal 2012, d.year
-      end
+      it "returns 6" $
+        zellers 1 12 2000 `shouldBe` 6
 
-      def test_zellers_returns_six
-        d = Day.new(1, 1, 2000)
-        z = d.zellers
-        assert_equal 6, z
-      end
+--       it "returns 0" $ do
+--         zellers 13 2 2000 `shouldBe` 0
 
-      def test_zellers_returns_zero
-        d = Day.new(13, 2, 2000)
-        z = d.zellers
-        assert_equal 0, z
-      end
+--       it "returns one" $ do
+--         zellers 1 10 2012 `shouldBe`  1
 
-      def test_zellers_returns_one
-        d = Day.new(1, 10, 2012)
-        z = d.zellers
-        assert_equal 1, z
-      end
+--       it "returns two" $ do
+--         zellers 14 1 1800 `shouldBe`  2
 
-      def test_zellers_returns_two
-        d = Day.new(14, 1, 1800)
-        z = d.zellers
-        assert_equal 2, z
-      end
+--       it "returns three" $ do
+--         zellers 2 6 2021 `shouldBe`  3
 
-      def test_zellers_returns_three
-        d = Day.new(2, 6, 2021)
-        z = d.zellers
-        assert_equal 3, z
-      end
+--       it "returns four" $ do
+--         zellers 30 4 2015 `shouldBe`  4
 
-      def test_zellers_returns_four
-        d = Day.new(30, 4, 2015)
-        z = d.zellers
-        assert_equal 4, z
-      end
-
-      def test_zellers_returns_five
-        d = Day.new(27, 12, 2999)
-        z = d.zellers
-        assert_equal 5, z
-      end
-
+--       it "returns five" $ do
+--         zellers 27 12 2999 `shouldBe`  5
