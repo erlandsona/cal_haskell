@@ -34,8 +34,12 @@ spec = parallel $ describe "Month" $ do
       daysString `shouldBe` "Su Mo Tu We Th Fr Sa"
 
   describe "#dayOne" $ do
-    it "returns a string with the proper padding for day one" $
-      dayOne 2 2016 `shouldBe` "    1"
+    it "returns prefix for day one" $
+      prefixDayOne 1 2017 `shouldBe` ""
+    it "returns prefix for day one" $
+      prefixDayOne 2 2016 `shouldBe` "   "
+    it "returns prefix for day one" $
+      prefixDayOne 1 2016 `shouldBe` "               "
 
   -- describe "#monthNumbers" $ do
 

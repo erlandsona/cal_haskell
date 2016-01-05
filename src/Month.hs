@@ -26,8 +26,9 @@ months = [undefined, "January", "February", "March", "April", "May", "June", "Ju
 header month year = T.unpack $
   T.center 20 ' ' (T.pack $ months !! month ++ " " ++ show year)
 daysString = "Su Mo Tu We Th Fr Sa"
-dayOne month year = T.unpack $ T.justifyRight (padding * (firstDayOfMonth 1 month year) + 1) ' ' (T.pack " 1")
-monthNumbers month year = ""
+prefixDayOne month year = T.unpack $ T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' (T.pack "")
+-- monthNumbers month year
+--   | prefixDayOne month year ++
 
 
 
