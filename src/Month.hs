@@ -1,9 +1,9 @@
-{-# LANGUAGE QuasiQuotes #-}
 module Month where
 
 import Data.Ratio
-import Text.RawString.QQ
-import Data.Text
+import qualified Data.Text as T
+import Data.List
+import Day
 
 daysInFebruary year
   | year `mod` 400 == 0 || year `mod` 4 == 0 && year `mod` 100 /= 0 = 29
@@ -23,33 +23,11 @@ months = [undefined, "January", "February", "March", "April", "May", "June", "Ju
 
 
 -- header :: Int -> Int -> Text
-header month year = unpack $
-  center 20 ' ' (pack $ months !! month ++ " " ++ show year)
+header month year = T.unpack $
+  T.center 20 ' ' (T.pack $ months !! month ++ " " ++ show year)
 daysString = "Su Mo Tu We Th Fr Sa"
--- monthNumbers = 
---   days_of_month = String.new.rjust(first_day_of_month * PADDING)
---   num_of_weeks = 1
-
---   1.upto(num_of_days) do |i|
---     date = i.to_s
---     obj = {true => date.center(PADDING), false => date.ljust(PADDING)}
---     if days_of_month.length > COLUMN_WIDTH
---       str << days_of_month.rstrip + "\n"
---       days_of_month = ""
---       num_of_weeks += 1
---     end
---     days_of_month << obj[i <= 9]
---   end
-
---   num_of_newlines = String.new
---   while num_of_weeks <= 6
---     num_of_newlines += "\n"
---     num_of_weeks += 1
---   end
---   str << days_of_month.rstrip + num_of_newlines
--- end
-
-
+dayOne month year = T.unpack $ T.justifyRight (padding * (firstDayOfMonth 1 month year) + 1) ' ' (T.pack " 1")
+monthNumbers month year = ""
 
 
 

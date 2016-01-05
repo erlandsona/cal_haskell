@@ -27,9 +27,9 @@ zellers day month year =
   +     6)
   `mod` 7
 
--- dayOfTheWeek :: Integral a => a -> a -> a -> a
-dayOfTheWeek :: Int -> Int -> Int -> Int
-dayOfTheWeek day month year
+-- firstDayOfMonth :: Integral a => a -> a -> a -> a
+firstDayOfMonth :: Int -> Int -> Int -> Int
+firstDayOfMonth day month year
   | month <= 2 = zellers day (month + 12) (year - 1)
   | otherwise = zellers day month year
 

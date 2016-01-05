@@ -25,17 +25,17 @@ spec = parallel $ describe "Day" $ do
       it "Gives a more meaningful error message" $
         pendingWith "Figure out error handling"
 
-  describe "#dayOfTheWeek" $ do
+  describe "#firstDayOfMonth" $ do
 
     context "Happy Path" $ do
 
-      it "returns 0" $ dayOfTheWeek 13 2  2000 `shouldBe` 0
-      it "returns 1" $ dayOfTheWeek 1  10 2012 `shouldBe` 1
-      it "returns 2" $ dayOfTheWeek 14 1  1800 `shouldBe` 2
-      it "returns 3" $ dayOfTheWeek 2  6  2021 `shouldBe` 3
-      it "returns 4" $ dayOfTheWeek 30 4  2015 `shouldBe` 4
-      it "returns 5" $ dayOfTheWeek 27 12 2999 `shouldBe` 5
-      it "returns 6" $ dayOfTheWeek 1  1  2000 `shouldBe` 6
+      it "returns 0" $ firstDayOfMonth 13 2  2000 `shouldBe` 0
+      it "returns 1" $ firstDayOfMonth 1  10 2012 `shouldBe` 1
+      it "returns 2" $ firstDayOfMonth 14 1  1800 `shouldBe` 2
+      it "returns 3" $ firstDayOfMonth 2  6  2021 `shouldBe` 3
+      it "returns 4" $ firstDayOfMonth 30 4  2015 `shouldBe` 4
+      it "returns 5" $ firstDayOfMonth 27 12 2999 `shouldBe` 5
+      it "returns 6" $ firstDayOfMonth 1  1  2000 `shouldBe` 6
 
     context "Sad Path" $ do
 
