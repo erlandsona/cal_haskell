@@ -24,11 +24,14 @@ months = [undefined, "January", "February", "March", "April", "May", "June", "Ju
 
 -- header :: Int -> Int -> Text
 header month year = T.unpack $
-  T.center 20 ' ' (T.pack $ months !! month ++ " " ++ show year)
+  T.center 20 ' ' $ T.pack $ months !! month ++ " " ++ show year
 daysString = "Su Mo Tu We Th Fr Sa"
-prefixDayOne month year = T.unpack $ T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' (T.pack "")
--- monthNumbers month year
---   | prefixDayOne month year ++
+prefixDayOne month year = T.unpack $
+  T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' $ T.pack ""
+-- monthNumbers = undefined
+monthNumbers month year =
+  prefixDayOne month year
+  ++ " 1 "
 
 
 

@@ -41,117 +41,117 @@ spec = parallel $ describe "Month" $ do
     it "returns prefix for day one" $
       prefixDayOne 1 2016 `shouldBe` "               "
 
-  -- describe "#monthNumbers" $ do
+  describe "#monthNumbers" $ do
 
-  --   it "builds Feb 2016" $
-  --     monthNumbers 2 2016 `shouldBe` intercalate "\n" [
-  --       "    1  2  3  4  5  6",
-  --       " 7  8  9 10 11 12 13",
-  --       "14 15 16 17 18 19 20",
-  --       "21 22 23 24 25 26 27",
-  --       "28 29",
-  --       ""
-  --     ]
+    it "builds Feb 2016" $
+      monthNumbers 2 2016 `shouldBe` intercalate "\n" [
+        "    1  2  3  4  5  6",
+        " 7  8  9 10 11 12 13",
+        "14 15 16 17 18 19 20",
+        "21 22 23 24 25 26 27",
+        "28 29",
+        ""
+      ]
 
-  --   it "builds Jan 2012" $
-  --     monthNumbers 1 2012 `shouldBe` intercalate "\n" [
-  --       " 1  2  3  4  5  6  7",
-  --       " 8  9 10 11 12 13 14",
-  --       "15 16 17 18 19 20 21",
-  --       "22 23 24 25 26 27 28",
-  --       "29 30 31",
-  --       ""
-  --     ]
+    it "builds Jan 2012" $
+      monthNumbers 1 2012 `shouldBe` intercalate "\n" [
+        " 1  2  3  4  5  6  7",
+        " 8  9 10 11 12 13 14",
+        "15 16 17 18 19 20 21",
+        "22 23 24 25 26 27 28",
+        "29 30 31",
+        ""
+      ]
 
-  --   it "builds Jan 2017" $
-  --     monthNumbers 1 2017 `shouldBe` intercalate "\n" [
-  --       " 1  2  3  4  5  6  7",
-  --       " 8  9 10 11 12 13 14",
-  --       "15 16 17 18 19 20 21",
-  --       "22 23 24 25 26 27 28",
-  --       "29 30 31",
-  --       ""
-  --     ]
+    it "builds Jan 2017" $
+      monthNumbers 1 2017 `shouldBe` intercalate "\n" [
+        " 1  2  3  4  5  6  7",
+        " 8  9 10 11 12 13 14",
+        "15 16 17 18 19 20 21",
+        "22 23 24 25 26 27 28",
+        "29 30 31",
+        ""
+      ]
 
-  --   it "builds May 2016" $
-  --     monthNumbers 1 2017 `shouldBe` intercalate "\n" [
-  --       " 1  2  3  4  5  6  7",
-  --       " 8  9 10 11 12 13 14",
-  --       "15 16 17 18 19 20 21",
-  --       "22 23 24 25 26 27 28",
-  --       "29 30 31",
-  --       ""
-  --     ]
+    it "builds May 2016" $
+      monthNumbers 1 2017 `shouldBe` intercalate "\n" [
+        " 1  2  3  4  5  6  7",
+        " 8  9 10 11 12 13 14",
+        "15 16 17 18 19 20 21",
+        "22 23 24 25 26 27 28",
+        "29 30 31",
+        ""
+      ]
 
-  --   it "builds Jan 2000" $
-  --     monthNumbers 1 2000 `shouldBe` intercalate "\n" [
-  --       "                   1",
-  --       " 2  3  4  5  6  7  8",
-  --       " 9 10 11 12 13 14 15",
-  --       "16 17 18 19 20 21 22",
-  --       "23 24 25 26 27 28 29",
-  --       "30 31"
-  --     ]
+    it "builds Jan 2000" $
+      monthNumbers 1 2000 `shouldBe` intercalate "\n" [
+        "                   1",
+        " 2  3  4  5  6  7  8",
+        " 9 10 11 12 13 14 15",
+        "16 17 18 19 20 21 22",
+        "23 24 25 26 27 28 29",
+        "30 31"
+      ]
 
-  --   it "builds May 2000" $
-  --     monthNumbers 5 2000 `shouldBe` intercalate "\n" [
-  --       "    1  2  3  4  5  6",
-  --       " 7  8  9 10 11 12 13",
-  --       "14 15 16 17 18 19 20",
-  --       "21 22 23 24 25 26 27",
-  --       "28 29 30 31",
-  --       ""
-  --     ]
+    it "builds May 2000" $
+      monthNumbers 5 2000 `shouldBe` intercalate "\n" [
+        "    1  2  3  4  5  6",
+        " 7  8  9 10 11 12 13",
+        "14 15 16 17 18 19 20",
+        "21 22 23 24 25 26 27",
+        "28 29 30 31",
+        ""
+      ]
 
-  --   it "builds Feb 2000" $
-  --     monthNumbers 2 2000 `shouldBe` intercalate "\n" [
-  --       "       1  2  3  4  5",
-  --       " 6  7  8  9 10 11 12",
-  --       "13 14 15 16 17 18 19",
-  --       "20 21 22 23 24 25 26",
-  --       "27 28 29",
-  --       ""
-  --     ]
+    it "builds Feb 2000" $
+      monthNumbers 2 2000 `shouldBe` intercalate "\n" [
+        "       1  2  3  4  5",
+        " 6  7  8  9 10 11 12",
+        "13 14 15 16 17 18 19",
+        "20 21 22 23 24 25 26",
+        "27 28 29",
+        ""
+      ]
 
-  --   it "builds March 2000" $
-  --     monthNumbers 3 2000 `shouldBe` intercalate "\n" [
-  --       "          1  2  3  4",
-  --       " 5  6  7  8  9 10 11",
-  --       "12 13 14 15 16 17 18",
-  --       "19 20 21 22 23 24 25",
-  --       "26 27 28 29 30 31",
-  --       ""
-  --     ]
+    it "builds March 2000" $
+      monthNumbers 3 2000 `shouldBe` intercalate "\n" [
+        "          1  2  3  4",
+        " 5  6  7  8  9 10 11",
+        "12 13 14 15 16 17 18",
+        "19 20 21 22 23 24 25",
+        "26 27 28 29 30 31",
+        ""
+      ]
 
-  --   it "builds June 2000" $
-  --     monthNumbers 6 2000 `shouldBe` intercalate "\n" [
-  --       "             1  2  3",
-  --       " 4  5  6  7  8  9 10",
-  --       "11 12 13 14 15 16 17",
-  --       "18 19 20 21 22 23 24",
-  --       "25 26 27 28 29 30",
-  --       ""
-  --     ]
+    it "builds June 2000" $
+      monthNumbers 6 2000 `shouldBe` intercalate "\n" [
+        "             1  2  3",
+        " 4  5  6  7  8  9 10",
+        "11 12 13 14 15 16 17",
+        "18 19 20 21 22 23 24",
+        "25 26 27 28 29 30",
+        ""
+      ]
 
-  --   it "builds September 2000" $
-  --     monthNumbers 9 2000 `shouldBe` intercalate "\n" [
-  --       "                1  2",
-  --       " 3  4  5  6  7  8  9",
-  --       "10 11 12 13 14 15 16",
-  --       "17 18 19 20 21 22 23",
-  --       "24 25 26 27 28 29 30",
-  --       ""
-  --     ]
+    it "builds September 2000" $
+      monthNumbers 9 2000 `shouldBe` intercalate "\n" [
+        "                1  2",
+        " 3  4  5  6  7  8  9",
+        "10 11 12 13 14 15 16",
+        "17 18 19 20 21 22 23",
+        "24 25 26 27 28 29 30",
+        ""
+      ]
 
-  --   it "builds February 2015" $
-  --     monthNumbers 2 2015 `shouldBe` intercalate "\n" [
-  --       " 1  2  3  4  5  6  7",
-  --       " 8  9 10 11 12 13 14",
-  --       "15 16 17 18 19 20 21",
-  --       "22 23 24 25 26 27 28",
-  --       "",
-  --       ""
-  --     ]
+    it "builds February 2015" $
+      monthNumbers 2 2015 `shouldBe` intercalate "\n" [
+        " 1  2  3  4  5  6  7",
+        " 8  9 10 11 12 13 14",
+        "15 16 17 18 19 20 21",
+        "22 23 24 25 26 27 28",
+        "",
+        ""
+      ]
 
 
 
