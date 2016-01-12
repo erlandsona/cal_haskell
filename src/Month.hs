@@ -5,35 +5,42 @@ import qualified Data.Text as T
 import Data.List
 import Day
 
+columnWidth = 20
+padding = 3
+
 daysInFebruary year
   | year `mod` 400 == 0 || year `mod` 4 == 0 && year `mod` 100 /= 0 = 29
   | otherwise = 28
 
-thirtyDayMonth month = month `elem` [4, 6, 9, 11]
-
 numOfDays month year
   | month == 2 = daysInFebruary year
-  | thirtyDayMonth month = 30
+  | month `elem` [4, 6, 9, 11] = 30
   | otherwise = 31
 
 
-columnWidth = 20
-padding = 3
-months = [undefined, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+months = [undefined, "January", "February", "March",
+          "April", "May", "June", "July", "August", 
+          "September", "October", "November", "December"]
 
 
--- header :: Int -> Int -> Text
-header month year = T.unpack $
-  T.center 20 ' ' $ T.pack $ months !! month ++ " " ++ show year
+-- header :: Int -> Int -> T.Text
+header month year = T.unpack .
+                    T.center 20 ' ' .
+                    T.pack $
+                    months !! month ++ " " ++ show year -- "Month Year"
+
+daysString :: String
 daysString = "Su Mo Tu We Th Fr Sa"
+
 prefixDayOne month year = T.unpack $
   T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' $ T.pack ""
--- monthNumbers = undefined
-monthNumbers month year =
-  prefixDayOne month year
-  ++ " 1 "
 
-
+monthNumbers month year = 
+  intercalate "\n" . map (reverse . drop 1 . reverse . T.unpack) $ T.chunksOf 20 grid
+  where numOfDaysArray = [1..numOfDays month year]
+        properlySpaced = prefixDayOne month year ++
+          concatMap (\x -> if x < 10 then ' ':show x ++ " " else ' ':show x) numOfDaysArray
+        grid           = T.justifyLeft 120 ' ' $ T.pack properlySpaced
 
 -- monthString month year = 
 -- [r|line1
