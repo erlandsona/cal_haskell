@@ -36,10 +36,10 @@ prefixDayOne month year = T.unpack $
   T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' $ T.pack ""
 
 monthNumbers month year = 
-  intercalate "\n" . map (reverse . drop 1 . reverse . T.unpack) $ T.chunksOf 20 grid
+  intercalate "\n" $ map T.unpack $ (T.chunksOf 20 grid)
   where numOfDaysArray = [1..numOfDays month year]
         properlySpaced = prefixDayOne month year ++
-          concatMap (\x -> if x < 10 then ' ':show x ++ " " else ' ':show x) numOfDaysArray
+          concatMap (\x -> if x < 9 then ' ':show x ++ " " else ' ':show x) numOfDaysArray
         grid           = T.justifyLeft 120 ' ' $ T.pack properlySpaced
 
 -- monthString month year = 
