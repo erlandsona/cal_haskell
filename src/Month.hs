@@ -35,9 +35,14 @@ daysString = "Su Mo Tu We Th Fr Sa"
 prefixDayOne month year = T.unpack $
   T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' $ T.pack ""
 
+replaceEvery :: Int -> Char -> String -> String
+replaceEvery nth replacement (head:tail)
+  | !! `mod` nth == 0 = replacement:tail
+  | otherwise = x:replaceEvery (count+1) replacement tail 
+
 monthNumbers month year = 
   grid
-  where grid           = T.chunksOf 20 $ T.pack properlySpaced
+  where grid           = properlySpaced
         properlySpaced = prefixDayOne month year ++
           concatMap adjuster [1..numOfDays month year]
         adjuster x
