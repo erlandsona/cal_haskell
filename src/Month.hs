@@ -35,12 +35,28 @@ daysString = "Su Mo Tu We Th Fr Sa"
 prefixDayOne month year = T.unpack $
   T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' $ T.pack ""
 
+
+-- replaceEvery :: Int -> Char -> String
+-- replaceEvery k = go
+--   where
+--     go t = case splitAt k t of
+--              (a,b) | null a    -> []
+--                    | otherwise -> a : go b
+
+
+-- replaceEvery :: Int -> Char -> String -> String
+-- replaceEvery int char string =
+  
+
+
 monthNumbers month year = 
-  intercalate "\n" $ map T.unpack $ (T.chunksOf 20 grid)
-  where numOfDaysArray = [1..numOfDays month year]
+  grid
+  where grid           = T.chunksOf 20 $ T.pack properlySpaced
         properlySpaced = prefixDayOne month year ++
-          concatMap (\x -> if x < 9 then ' ':show x ++ " " else ' ':show x) numOfDaysArray
-        grid           = T.justifyLeft 120 ' ' $ T.pack properlySpaced
+          concatMap adjuster [1..numOfDays month year]
+        adjuster x
+          | x < 9 = ' ':show x ++ " "
+          | otherwise = ' ':show x
 
 -- monthString month year = 
 -- [r|line1
