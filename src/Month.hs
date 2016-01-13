@@ -35,20 +35,6 @@ daysString = "Su Mo Tu We Th Fr Sa"
 prefixDayOne month year = T.unpack $
   T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' $ T.pack ""
 
-
--- replaceEvery :: Int -> Char -> String
--- replaceEvery k = go
---   where
---     go t = case splitAt k t of
---              (a,b) | null a    -> []
---                    | otherwise -> a : go b
-
-
--- replaceEvery :: Int -> Char -> String -> String
--- replaceEvery int char string =
-  
-
-
 monthNumbers month year = 
   grid
   where grid           = T.chunksOf 20 $ T.pack properlySpaced
@@ -57,19 +43,3 @@ monthNumbers month year =
         adjuster x
           | x < 9 = ' ':show x ++ " "
           | otherwise = ' ':show x
-
--- monthString month year = 
--- [r|line1
---    line2
---    line3|]
---   unlines [
---     "   February 2015    ",
---     "Su Mo Tu We Th Fr Sa",
---     " 1  2  3  4  5  6  7",
---     " 8  9 10 11 12 13 14",
---     "15 16 17 18 19 20 21",
---     "22 23 24 25 26 27 28",
---     "                    ",
---     "                    "
---   ]
-
