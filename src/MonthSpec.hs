@@ -9,27 +9,27 @@ main :: IO ()
 main = hspec spec
 
 spec = parallel $ describe "Month" $ do
-  describe "#daysInFebruary" $ do
+  describe "daysInFebruary" $ do
     it "2015 returns 28" $ daysInFebruary 2015 `shouldBe` 28
     it "2016 returns 29" $ daysInFebruary 2016 `shouldBe` 29
-    
-  describe "#numOfDays" $ do
+
+  describe "numOfDays" $ do
     it "February 2015 has 28 days" $ numOfDays 2 2015 `shouldBe` 28
     it "February 2016 has 29 days" $ numOfDays 2 2016 `shouldBe` 29
     it "April    2016 has 30 days" $ numOfDays 4 2016 `shouldBe` 30
     it "Other months have 31 days" $ numOfDays 5 2016 `shouldBe` 31
 
-  describe "#header" $ do
+  describe "header" $ do
     it "February 2015" $ do
       header 2 2015 `shouldBe` "    February 2015   "
     it "January 2016" $ do
       header 1 2016 `shouldBe` "    January 2016    "
 
-  describe "#daysString" $ do
+  describe "daysString" $ do
     it "returns two letter names of days" $
       daysString `shouldBe` "Su Mo Tu We Th Fr Sa"
 
-  describe "#dayOne" $ do
+  describe "dayOne" $ do
     it "returns prefix for Jan 1st 2017" $
       prefixDayOne 1 2017 `shouldBe` ""
     it "returns prefix for Feb 1st 2016" $
@@ -37,7 +37,7 @@ spec = parallel $ describe "Month" $ do
     it "returns prefix for Jan 1st 2016" $
       prefixDayOne 1 2016 `shouldBe` "               "
 
-  describe "#monthNumbers" $ do
+  describe "monthNumbers" $ do
 
     it "builds Feb 2016" $
       monthNumbers 2 2016 `shouldBe` intercalate "\n" [
@@ -45,7 +45,7 @@ spec = parallel $ describe "Month" $ do
         " 7  8  9 10 11 12 13",
         "14 15 16 17 18 19 20",
         "21 22 23 24 25 26 27",
-        "28 29",
+        "28 29               ",
         ""
       ]
 
@@ -55,7 +55,7 @@ spec = parallel $ describe "Month" $ do
         " 8  9 10 11 12 13 14",
         "15 16 17 18 19 20 21",
         "22 23 24 25 26 27 28",
-        "29 30 31",
+        "29 30 31            ",
         ""
       ]
 
@@ -65,7 +65,7 @@ spec = parallel $ describe "Month" $ do
         " 8  9 10 11 12 13 14",
         "15 16 17 18 19 20 21",
         "22 23 24 25 26 27 28",
-        "29 30 31",
+        "29 30 31            ",
         ""
       ]
 
@@ -75,7 +75,7 @@ spec = parallel $ describe "Month" $ do
         " 8  9 10 11 12 13 14",
         "15 16 17 18 19 20 21",
         "22 23 24 25 26 27 28",
-        "29 30 31",
+        "29 30 31            ",
         ""
       ]
 
@@ -86,7 +86,7 @@ spec = parallel $ describe "Month" $ do
         " 9 10 11 12 13 14 15",
         "16 17 18 19 20 21 22",
         "23 24 25 26 27 28 29",
-        "30 31"
+        "30 31               "
       ]
 
     it "builds May 2000" $
@@ -95,7 +95,7 @@ spec = parallel $ describe "Month" $ do
         " 7  8  9 10 11 12 13",
         "14 15 16 17 18 19 20",
         "21 22 23 24 25 26 27",
-        "28 29 30 31",
+        "28 29 30 31         ",
         ""
       ]
 
@@ -105,7 +105,7 @@ spec = parallel $ describe "Month" $ do
         " 6  7  8  9 10 11 12",
         "13 14 15 16 17 18 19",
         "20 21 22 23 24 25 26",
-        "27 28 29",
+        "27 28 29            ",
         ""
       ]
 
@@ -115,7 +115,7 @@ spec = parallel $ describe "Month" $ do
         " 5  6  7  8  9 10 11",
         "12 13 14 15 16 17 18",
         "19 20 21 22 23 24 25",
-        "26 27 28 29 30 31",
+        "26 27 28 29 30 31   ",
         ""
       ]
 
@@ -125,7 +125,7 @@ spec = parallel $ describe "Month" $ do
         " 4  5  6  7  8  9 10",
         "11 12 13 14 15 16 17",
         "18 19 20 21 22 23 24",
-        "25 26 27 28 29 30",
+        "25 26 27 28 29 30   ",
         ""
       ]
 
@@ -149,7 +149,15 @@ spec = parallel $ describe "Month" $ do
         ""
       ]
 
-
-
-
-
+  describe "monthString" $ do
+    it "puts the header days and numbers together" $
+      monthString 2 2016 `shouldBe` intercalate "\n" [
+        "    February 2016   ",
+        "Su Mo Tu We Th Fr Sa",
+        "    1  2  3  4  5  6",
+        " 7  8  9 10 11 12 13",
+        "14 15 16 17 18 19 20",
+        "21 22 23 24 25 26 27",
+        "28 29               ",
+        ""
+      ]

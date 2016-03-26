@@ -17,11 +17,9 @@ numOfDays month year
   | month `elem` [4, 6, 9, 11] = 30
   | otherwise = 31
 
-
 months = [undefined, "January", "February", "March",
           "April", "May", "June", "July", "August", 
           "September", "October", "November", "December"]
-
 
 -- header :: Int -> Int -> T.Text
 header month year = T.unpack .
@@ -35,16 +33,32 @@ daysString = "Su Mo Tu We Th Fr Sa"
 prefixDayOne month year = T.unpack $
   T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' $ T.pack ""
 
-replaceEvery :: Int -> Char -> String -> String
-replaceEvery nth replacement (head:tail)
-  | !! `mod` nth == 0 = replacement:tail
-  | otherwise = x:replaceEvery (count+1) replacement tail 
+pairManipulator :: (String,String) -> (String,String)
+pairManipulator (as,bs)
+  | all (' '==) as = ("\n", bs)
+  | otherwise      = (as ++ "\n", drop 1 bs)
 
-monthNumbers month year = 
-  grid
-  where grid           = properlySpaced
+arrOfChunks :: String -> [String]
+arrOfChunks list
+  | list == "" = []
+  | otherwise  = fst pair : arrOfChunks (snd pair)
+  where pair = pairManipulator . splitAt 20 $ list
+
+-- monthNumbers :: Int -> Int -> String
+monthNumbers month year
+  | any (' '==) (last chunks) =
+      reverse . (' ':) . drop 1 . reverse . concat $ chunks
+  | otherwise = init . concat $ chunks
+  where numOfDaysArray = [1..numOfDays month year]
         properlySpaced = prefixDayOne month year ++
-          concatMap adjuster [1..numOfDays month year]
-        adjuster x
-          | x < 9 = ' ':show x ++ " "
-          | otherwise = ' ':show x
+          concatMap (\x -> if x < 9 then ' ':show x ++ " " else ' ':show x) numOfDaysArray
+        grid           = T.unpack . T.justifyLeft 124 ' ' $ T.pack properlySpaced
+        chunks = arrOfChunks grid
+
+
+monthString month year =
+  intercalate "\n" [
+    header month year,
+    daysString,
+    monthNumbers month year
+  ]

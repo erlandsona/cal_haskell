@@ -8,7 +8,7 @@ main = hspec spec
 
 spec = parallel $ describe "Day" $ do
 
-  describe "#zellers" $ do
+  describe "zellers" $ do
 
     context "Happy Path" $ do
 
@@ -25,7 +25,7 @@ spec = parallel $ describe "Day" $ do
       it "Gives a more meaningful error message" $
         pendingWith "Figure out error handling"
 
-  describe "#firstDayOfMonth" $ do
+  describe "firstDayOfMonth" $ do
 
     context "Happy Path" $ do
 
