@@ -9,10 +9,6 @@ main :: IO ()
 main = hspec spec
 
 spec = parallel $ describe "Month" $ do
-  describe "daysInFebruary" $ do
-    it "2015 returns 28" $ daysInFebruary 2015 `shouldBe` 28
-    it "2016 returns 29" $ daysInFebruary 2016 `shouldBe` 29
-
   describe "numOfDays" $ do
     it "February 2015 has 28 days" $ numOfDays 2 2015 `shouldBe` 28
     it "February 2016 has 29 days" $ numOfDays 2 2016 `shouldBe` 29
