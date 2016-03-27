@@ -21,6 +21,7 @@ monthNamePaddedArr =
   map (unpack . center 20 ' ' . pack) $ drop 1 months
 
 threeMonthHeader monthRow = yearPadding $ take 3 $ drop ((monthRow - 1) * 3) monthNamePaddedArr
+
 yearDaysOfWeek = yearPadding $ take 3 $ repeat daysString
 
 threeMonthsWeekNumbers week monthRow year =

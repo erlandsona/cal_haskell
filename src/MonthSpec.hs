@@ -79,6 +79,41 @@ spec = parallel $ describe "Month" $do
       it "May 2016" $do
         properlySpaced 5 2016 `shouldBe` " 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
 
+  describe "grid" $do
+    it "left justifies whatever comes back from properlySpaced." $do
+      grid 2 2015 `shouldBe` " 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28                                         "
+
+  describe "chunks" $do
+    describe "creates an arrayOfWeeks out of the grid." $do
+      it "February 2015" $do
+        chunks 2 2015
+        `shouldBe`
+        [" 1  2  3  4  5  6  7\n"
+        ," 8  9 10 11 12 13 14\n"
+        ,"15 16 17 18 19 20 21\n"
+        ,"22 23 24 25 26 27 28\n"
+        ,"\n"
+        ,"\n"]
+
+      it "April 2016" $do
+        chunks 4 2016
+        `shouldBe`
+        ["                1  2\n"
+        ," 3  4  5  6  7  8  9\n"
+        ,"10 11 12 13 14 15 16\n"
+        ,"17 18 19 20 21 22 23\n"
+        ,"24 25 26 27 28 29 30\n"
+        ,"\n"]
+
+      it "May 2016" $do
+        chunks 5 2016
+        `shouldBe`
+        [" 1  2  3  4  5  6  7\n"
+        ," 8  9 10 11 12 13 14\n"
+        ,"15 16 17 18 19 20 21\n"
+        ,"22 23 24 25 26 27 28\n"
+        ,"29 30 31            \n"
+        ,"\n"]
 
 
   describe "monthNumbers" $do
