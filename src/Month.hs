@@ -5,10 +5,15 @@ import qualified Data.Text as T
 import Data.List
 import Day
 
+type Days = Int
+type Week = Int
+type Month = Int
+type Year = Int
+
 columnWidth = 20
 padding = 3
 
-numOfDays :: Int -> Int -> Int
+numOfDays :: Month -> Year -> Days
 numOfDays month year
   | month == 2 = daysInFebruary
   | month `elem` [4, 6, 9, 11] = 30
@@ -22,7 +27,7 @@ months = ["", "January", "February", "March",
           "April", "May", "June", "July", "August",
           "September", "October", "November", "December"]
 
-header :: Int -> Int -> String
+header :: Month -> Year -> String
 header month year = T.unpack .
                     T.center 20 ' ' .
                     T.pack $
@@ -31,7 +36,7 @@ header month year = T.unpack .
 daysString :: String
 daysString = "Su Mo Tu We Th Fr Sa"
 
-prefixDayOne :: Int -> Int -> String
+prefixDayOne :: Month -> Year -> String
 prefixDayOne month year = T.unpack $
   T.justifyRight (padding * (firstDayOfMonth 1 month year)) ' ' $ T.pack ""
 
@@ -46,16 +51,25 @@ arrOfWeeks list
   | otherwise  = fst pair : arrOfWeeks (snd pair)
   where pair = pairManipulator . splitAt 20 $ list
 
-monthNumbers :: Int -> Int -> String
+numOfDaysArray :: Month -> Year -> [Days]
+numOfDaysArray month year = [1..numOfDays month year]
+
+properlySpaced :: Month -> Year -> String
+properlySpaced month year = prefixDayOne month year ++
+          concatMap (\x -> if x < 9 then ' ':show x ++ " " else ' ':show x) (numOfDaysArray month year)
+
+grid :: Month -> Year -> String
+grid month year = T.unpack . T.justifyLeft 124 ' ' . T.pack $ properlySpaced month year
+
+chunks :: Month -> Year -> [String]
+chunks month year = arrOfWeeks $ grid month year
+
+monthNumbers :: Month -> Year -> String
 monthNumbers month year
-  | any (' '==) (last chunks) =
-      reverse . (' ':) . drop 1 . reverse . concat $ chunks
-  | otherwise = init . concat $ chunks
-  where numOfDaysArray = [1..numOfDays month year]
-        properlySpaced = prefixDayOne month year ++
-          concatMap (\x -> if x < 9 then ' ':show x ++ " " else ' ':show x) numOfDaysArray
-        grid           = T.unpack . T.justifyLeft 124 ' ' $ T.pack properlySpaced
-        chunks = arrOfWeeks grid
+  | any (' '==) . last $ chunkers =
+      reverse . (' ':) . drop 1 . reverse . concat $ chunkers
+  | otherwise = init . concat $ chunkers
+  where chunkers = chunks month year
 
 
 monthString :: Int -> Int -> String
