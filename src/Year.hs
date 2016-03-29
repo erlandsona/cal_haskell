@@ -24,7 +24,7 @@ monthNamePaddedArr =
 
 threeMonthHeader monthRow = yearPadding $ take 3 $ drop ((monthRow - 1) * 3) monthNamePaddedArr
 
-yearDaysOfWeek = yearPadding $ take 3 $ repeat daysString
+yearDaysOfWeek = yearPadding $ replicate 3 daysString
 
 pack20 :: String -> String
 pack20 = unpack . justifyLeft 20 ' ' . pack . rstrip
