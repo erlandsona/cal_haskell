@@ -54,15 +54,14 @@ executable cal-haskell
   main-is:             cal.hs
 
   -- Modules included in this executable, other than Main.
-  -- other-modules:
+  other-modules:      Month, Year
 
   -- LANGUAGE extensions used by modules in this package.
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
   build-depends:      base >=4.8 && <4.9,
-                      hspec,
-                      missingh
+                      hspec
 
   -- Directories containing source files.
   -- hs-source-dirs: "./src/"
