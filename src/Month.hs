@@ -1,6 +1,5 @@
 module Month where
 
-import Data.Ratio
 import qualified Data.Text as T
 import Data.List
 import Day
@@ -10,6 +9,7 @@ type Week = Int
 type Month = Int
 type Year = Int
 
+columnWidth, padding :: Int
 columnWidth = 20
 padding = 3
 

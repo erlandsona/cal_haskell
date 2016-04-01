@@ -1,13 +1,23 @@
 module DaySpec where
 
 import Test.Hspec
+  ( Spec
+  , context
+  , describe
+  , hspec
+  , it
+  , parallel
+  , pendingWith
+  , shouldBe
+  )
+
 import Day
 
 main :: IO ()
 main = hspec spec
 
+spec :: Spec
 spec = parallel $ describe "Day" $ do
-
   describe "zellers" $ do
 
     context "Happy Path" $ do
@@ -20,7 +30,7 @@ spec = parallel $ describe "Day" $ do
       it "returns 5" $ zellers 1  1  2000 `shouldBe` 5
       it "returns 6" $ zellers 28 12 2999 `shouldBe` 6
 
-    context "Sad Path" $ do
+    context "Sad Path" $
 
       it "Gives a more meaningful error message" $
         pendingWith "Figure out error handling"
@@ -37,7 +47,7 @@ spec = parallel $ describe "Day" $ do
       it "returns 5" $ firstDayOfMonth 27 12 2999 `shouldBe` 5
       it "returns 6" $ firstDayOfMonth 1  1  2000 `shouldBe` 6
 
-    context "Sad Path" $ do
+    context "Sad Path" $
 
       it "Gives a more meaningful error message" $
         pendingWith "Figure out error handling"
