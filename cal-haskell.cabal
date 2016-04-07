@@ -10,7 +10,7 @@ name:                cal-haskell
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.1.0.0
+version:             0.1.0.1
 
 -- A short (one-line) description of the package.
 synopsis:            Trying to learn Haskell for great good!
@@ -19,7 +19,7 @@ synopsis:            Trying to learn Haskell for great good!
 -- description:
 
 -- URL for the project homepage or repository.
-homepage:            git@github.com:erlandsona/cal_haskell.git
+homepage:            https://github.com/erlandsona/cal_haskell
 
 -- The license under which the package is released.
 license:             MIT
@@ -50,22 +50,25 @@ cabal-version:       >=1.10
 
 
 executable cal-haskell
-  -- .hs or .lhs file containing the Main module.
-  main-is:             cal.hs
-
-  -- Modules included in this executable, other than Main.
-  other-modules:      Month, Year
-
-  -- LANGUAGE extensions used by modules in this package.
-  -- other-extensions:
-
-  -- Other library packages from which modules are imported.
-  build-depends:      base >=4.8 && <4.9,
-                      hspec
-
-  -- Directories containing source files.
-  -- hs-source-dirs: "./src/"
-
-  -- Base language which the package is written in.
+  main-is:             Main.hs
+  ghc-options:         -Wall -Werror -O2
   default-language:    Haskell2010
+  hs-source-dirs:      src
+  build-depends:       base >=4.8 && <4.9,
+                       MissingH,
+                       text
 
+test-suite tests
+  default-language:    Haskell2010
+  type:                exitcode-stdio-1.0
+  ghc-options:         -Wall
+  hs-source-dirs:      src, test
+  main-is:             Spec.hs
+  build-depends:       base >=4.8 && <4.9,
+                       hspec,
+                       MissingH,
+                       text
+
+source-repository head
+  type:     git
+  location: git@github.com:erlandsona/cal_haskell.git

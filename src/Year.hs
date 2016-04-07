@@ -1,43 +1,41 @@
 module Year where
 
-import Data.List
+import Data.List (intercalate)
 import Data.Text (justifyLeft, center, pack, unpack)
 import Data.String.Utils (strip, rstrip)
-import Month
+
+import Month (Year, Week, daysString, chunks, months)
 
 type MonthRow = Int
 
-yearPadding :: [String] -> String
+yearPadding, yearNewLine :: [String] -> String
 yearPadding = intercalate "  "
 yearNewLine = intercalate "\n"
 
 titleString :: Year -> String
-titleString year =
-    unpack . center 64 ' ' $ pack . strip . show $ year
+titleString year = unpack . center 64 ' ' $ pack . strip . show $ year
 
-spacerString =
-  "                                                                "
+spacerString, yearDaysOfWeek :: String
+spacerString = "                                                                "
+yearDaysOfWeek = yearPadding $ replicate 3 daysString
 
 monthNamePaddedArr :: [String]
-monthNamePaddedArr =
-  map (unpack . center 20 ' ' . pack) $ drop 1 months
+monthNamePaddedArr = map (unpack . center 20 ' ' . pack) $ drop 1 months
 
+threeMonthHeader :: MonthRow -> String
 threeMonthHeader monthRow = yearPadding $ take 3 $ drop ((monthRow - 1) * 3) monthNamePaddedArr
-
-yearDaysOfWeek = yearPadding $ replicate 3 daysString
 
 pack20 :: String -> String
 pack20 = unpack . justifyLeft 20 ' ' . pack . rstrip
 
-
+threeMonthsWeekNumbers :: Week -> MonthRow -> Year -> String
 threeMonthsWeekNumbers week monthRow year =
   yearPadding [packedChunks ((monthRow * 3) - 2)
               ,packedChunks ((monthRow * 3) - 1)
               ,packedChunks (monthRow * 3)]
-  where packedChunks monthRow = pack20 $ chunks monthRow year !! (week - 1)
+  where packedChunks m = pack20 $ chunks m year !! (week - 1)
 
-
-threeMonths :: Int -> Year -> String
+threeMonths :: MonthRow -> Year -> String
 threeMonths monthRow year =
   yearNewLine
     [threeMonthHeader monthRow

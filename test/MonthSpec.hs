@@ -1,91 +1,92 @@
 module MonthSpec where
 
-import Test.Hspec
-import Data.Text (center, pack, unpack)
-import Data.List
+import Test.Hspec (Spec, context, describe, hspec, it, parallel, shouldBe)
+import Data.List (intercalate)
+
 import Month
 
 main :: IO ()
 main = hspec spec
 
-spec = parallel $ describe "Month" $do
-  describe "numOfDays" $do
+spec :: Spec
+spec = parallel $ describe "Month" $ do
+  describe "numOfDays" $ do
     it "February 2015 has 28 days" $ numOfDays 2 2015 `shouldBe` 28
     it "February 2016 has 29 days" $ numOfDays 2 2016 `shouldBe` 29
     it "April    2016 has 30 days" $ numOfDays 4 2016 `shouldBe` 30
     it "Other months have 31 days" $ numOfDays 5 2016 `shouldBe` 31
 
-  describe "header" $do
-    it "February 2015" $do
+  describe "header" $ do
+    it "February 2015" $
       header 2 2015 `shouldBe` "    February 2015   "
-    it "January 2016" $do
+    it "January 2016" $
       header 1 2016 `shouldBe` "    January 2016    "
 
-  describe "daysString" $do
-    it "returns two letter names of days" $do
+  describe "daysString" $
+    it "returns two letter names of days" $
       daysString `shouldBe` "Su Mo Tu We Th Fr Sa"
 
-  describe "prefixDayOne" $do
-    it "returns prefix for Jan 1st 2017" $do
+  describe "prefixDayOne" $ do
+    it "returns prefix for Jan 1st 2017" $
       prefixDayOne 1 2017 `shouldBe` ""
-    it "returns prefix for Feb 1st 2016" $do
+    it "returns prefix for Feb 1st 2016" $
       prefixDayOne 2 2016 `shouldBe` "   "
-    it "returns prefix for Jan 1st 2016" $do
+    it "returns prefix for Jan 1st 2016" $
       prefixDayOne 1 2016 `shouldBe` "               "
 
 
-  describe "pairManipulator" $do
-    describe "takes a pair of strings and returns a pair of strings manipulated." $do
-      context "when as are all whitespace" $do
-        it "should return a \\n and bs" $do
+  describe "pairManipulator" $
+    describe "takes a pair of strings and returns a pair of strings manipulated." $ do
+      context "when as are all whitespace" $
+        it "should return a \\n and bs" $
           pairManipulator ("       ", "      ") `shouldBe`
                           ("\n", "      ")
-      context "when as are empty" $do
-        it "should return a \\n and bs" $do
+      context "when as are empty" $
+        it "should return a \\n and bs" $
           pairManipulator ("", "      ") `shouldBe`
                           ("\n", "      ")
-      context "when as got stuff in em" $do
-        it "should return a \\n and bs" $do
+      context "when as got stuff in em" $
+        it "should return a \\n and bs" $
           pairManipulator ("asdf asdf ", "1234      ") `shouldBe`
                           ("asdf asdf \n", "234      ")
 
-  describe "arrOfWeeks" $do
-    context "when list is empty" $do
-      it "should return an empty array" $do
+  describe "arrOfWeeks" $ do
+    context "when list is empty" $
+      it "should return an empty array" $
         arrOfWeeks "" `shouldBe` []
-    context "when list is not empty" $do
-      it "should return an array of strings adjusted by the pair manipulator" $do
+    context "when list is not empty" $
+      it "should return an array of strings adjusted by the pair manipulator" $
         arrOfWeeks "012345678901234567890123456789012345678901234567890123456789"
             `shouldBe`
                   ["01234567890123456789\n"
                   ,"12345678901234567890\n"
                   ,"234567890123456789\n"]
 
-  describe "numOfDaysArray" $do
-    it "February 2015 has 28 days" $do numOfDaysArray 2 2015 `shouldBe` [1..28]
-    it "February 2016 has 29 days" $do numOfDaysArray 2 2016 `shouldBe` [1..29]
-    it "April    2016 has 30 days" $do numOfDaysArray 4 2016 `shouldBe` [1..30]
-    it "Other months have 31 days" $do numOfDaysArray 5 2016 `shouldBe` [1..31]
+  describe "numOfDaysArray" $ do
+    it "February 2015 has 28 days" $ numOfDaysArray 2 2015 `shouldBe` [1..28]
+    it "February 2016 has 29 days" $ numOfDaysArray 2 2016 `shouldBe` [1..29]
+    it "April    2016 has 30 days" $ numOfDaysArray 4 2016 `shouldBe` [1..30]
+    it "Other months have 31 days" $ numOfDaysArray 5 2016 `shouldBe` [1..31]
 
 
-  describe "properlySpaced" $do
-    describe "separates the numbers with the proper padding according to a 20 column grid." $do
-      it "February 2015" $do
+  describe "properlySpaced" $
+    describe "separates the numbers with the proper padding according to a 20 column grid." $ do
+      it "February 2015" $
         properlySpaced 2 2015 `shouldBe` " 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28"
-      it "February 2016" $do
+      it "February 2016" $
         properlySpaced 2 2016 `shouldBe` "    1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29"
-      it "April 2016" $do
+      it "April 2016" $
         properlySpaced 4 2016 `shouldBe` "                1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30"
-      it "May 2016" $do
+      it "May 2016" $
         properlySpaced 5 2016 `shouldBe` " 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
 
-  describe "grid" $do
-    it "left justifies whatever comes back from properlySpaced." $do
+  describe "grid" $
+    it "left justifies whatever comes back from properlySpaced." $
       grid 2 2015 `shouldBe` " 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28                                         "
 
-  describe "chunks" $do
-    describe "creates an arrayOfWeeks out of the grid." $do
-      it "February 2015" $do
+  describe "chunks" $
+    describe "creates an arrayOfWeeks out of the grid." $ do
+      it "February 2015" $
         chunks 2 2015
         `shouldBe`
         [" 1  2  3  4  5  6  7\n"
@@ -95,7 +96,7 @@ spec = parallel $ describe "Month" $do
         ,"\n"
         ,"\n"]
 
-      it "April 2016" $do
+      it "April 2016" $
         chunks 4 2016
         `shouldBe`
         ["                1  2\n"
@@ -105,7 +106,7 @@ spec = parallel $ describe "Month" $do
         ,"24 25 26 27 28 29 30\n"
         ,"\n"]
 
-      it "May 2016" $do
+      it "May 2016" $
         chunks 5 2016
         `shouldBe`
         [" 1  2  3  4  5  6  7\n"
@@ -116,7 +117,7 @@ spec = parallel $ describe "Month" $do
         ,"\n"]
 
 
-  describe "monthNumbers" $do
+  describe "monthNumbers" $ do
 
     it "builds Feb 2016" $
       monthNumbers 2 2016 `shouldBe` intercalate "\n" [
@@ -326,7 +327,7 @@ spec = parallel $ describe "Month" $do
         ,"25 26 27 28 29 30 31"
         ,""]
 
-  describe "monthString" $do
+  describe "monthString" $
     it "puts the header days and numbers together" $
       monthString 2 2016 `shouldBe` intercalate "\n" [
          "    February 2016   "
