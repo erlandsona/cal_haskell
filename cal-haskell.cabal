@@ -2,51 +2,51 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 -- The name of the package.
-name:                  cal-haskell
+name:                cal-haskell
 
 -- The package version.  See the Haskell package versioning policy (PVP)
 -- for standards guiding when and how versions should be incremented.
 -- http://www.haskell.org/haskellwiki/Package_versioning_policy
--- PVP summary:        +-+------- breaking API changes
---                     | | +----- non-breaking API additions
---                     | | | +--- code changes with no API change
-version:               0.1.0.1
+-- PVP summary:      +-+------- breaking API changes
+--                   | | +----- non-breaking API additions
+--                   | | | +--- code changes with no API change
+version:             0.1.0.1
 
 -- A short (one-line) description of the package.
-synopsis:              Trying to learn Haskell for great good!
+synopsis:            Trying to learn Haskell for great good!
 
 -- A longer description of the package.
 -- description:
 
 -- URL for the project homepage or repository.
-homepage:              https://github.com/erlandsona/cal_haskell
+homepage:            https://github.com/erlandsona/cal_haskell
 
 -- The license under which the package is released.
-license:               MIT
+license:             MIT
 
 -- The file containing the license text.
-license-file:          LICENSE
+license-file:        LICENSE
 
 -- The package author(s).
-author:                Austin Erlandson
+author:              Austin Erlandson
 
 -- An email address to which users can send suggestions, bug reports, and
 -- patches.
-maintainer:            austin@erlandson.com
+maintainer:          austin@erlandson.com
 
 -- A copyright notice.
 -- copyright:
 
 -- category:
 
-build-type:            Simple
+build-type:          Simple
 
 -- Extra files to be distributed with the package, such as examples or a
 -- README.
 -- extra-source-files:
 
 -- Constraint on the version of Cabal needed to build this package.
-cabal-version:         >=1.10
+cabal-version:       >=1.10
 
 
 executable cal-haskell
