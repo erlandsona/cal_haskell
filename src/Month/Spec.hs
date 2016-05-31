@@ -1,9 +1,9 @@
-module MonthSpec where
+module Month.Spec where
 
 import Test.Hspec (Spec, context, describe, hspec, it, parallel, shouldBe)
 import Data.List (intercalate)
 
-import Month
+import Month.Main
 
 main :: IO ()
 main = hspec spec

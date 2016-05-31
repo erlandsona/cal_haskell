@@ -1,4 +1,4 @@
-module Day where
+module Day.Main where
 
 import Data.Ratio
 
@@ -15,9 +15,9 @@ import Data.Ratio
 ---------------------------
 
 zellers :: Int -> Int -> Int -> Int
-zellers day month year = 
-       (day 
-  +     floor ((month + 1) * 26 % 10) 
+zellers day month year =
+       (day
+  +     floor ((month + 1) * 26 % 10)
   +     year
   +     floor (year % 4)
   +     6

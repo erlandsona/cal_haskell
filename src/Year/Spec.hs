@@ -1,9 +1,9 @@
-module YearSpec where
+module Year.Spec where
 
 import Test.Hspec (Spec, describe, hspec, it, parallel, shouldBe)
 import Data.List (intercalate)
 
-import Year
+import Year.Main
 
 main :: IO ()
 main = hspec spec

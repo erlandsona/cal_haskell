@@ -1,8 +1,8 @@
-module Month where
+module Month.Main where
 
 import qualified Data.Text as T
 import Data.List
-import Day
+import Day.Main
 
 type Days = Int
 type Week = Int

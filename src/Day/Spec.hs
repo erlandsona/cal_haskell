@@ -1,4 +1,4 @@
-module DaySpec where
+module Day.Spec where
 
 import Test.Hspec
   ( Spec
@@ -11,7 +11,7 @@ import Test.Hspec
   , shouldBe
   )
 
-import Day
+import Day.Main
 
 main :: IO ()
 main = hspec spec

@@ -1,10 +1,10 @@
-module Year where
+module Year.Main where
 
 import Data.List (intercalate)
 import Data.Text (justifyLeft, center, pack, unpack)
 import Data.String.Utils (strip, rstrip)
 
-import Month (Year, Week, daysString, chunks, months)
+import Month.Main (Year, Week, daysString, chunks, months)
 
 type MonthRow = Int
 

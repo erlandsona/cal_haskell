@@ -1,7 +1,7 @@
 import System.Environment (getArgs)
 
-import Month (monthString)
-import Year (yearString)
+import Month.Main (monthString)
+import Year.Main (yearString)
 
 main :: IO ()
 main = do
