@@ -7,6 +7,7 @@
 -- don't have specs written.
 
 import Test.Hspec
+import Test.QuickCheck
 
 import qualified Day.Spec   as DS
 import qualified Month.Spec as MS
@@ -17,6 +18,9 @@ main = hspec spec
 
 spec :: Spec
 spec = do
+  describe "Maths" $ do
+    it "x + 1 is always greater than x" $ do
+      property $ \x -> x + 1 > (x :: Int)
   describe "Day"    DS.spec
   describe "Month"  MS.spec
   describe "Year"   YS.spec
