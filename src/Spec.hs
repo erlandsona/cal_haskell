@@ -8,9 +8,9 @@
 
 import Test.Hspec
 
-import qualified Day.Spec as DS
+import qualified Day.Spec   as DS
 import qualified Month.Spec as MS
-import qualified Year.Spec as YS
+import qualified Year.Spec  as YS
 
 main :: IO ()
 main = hspec spec
