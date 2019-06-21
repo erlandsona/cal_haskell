@@ -30,7 +30,7 @@ zellers day month year =
 -- firstDayOfMonth :: Integral a => a -> a -> a -> a
 firstDayOfMonth :: Int -> Int -> Int -> Int
 firstDayOfMonth day month year
-  | month <= 2 = zellers day (month + 12) (year - 1)
+  | month <= 2 = zellers (month + 12) day (year - 1)
   | otherwise = zellers day month year
 
 -- Ruby implementaion...
