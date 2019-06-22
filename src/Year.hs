@@ -4,7 +4,8 @@ import Data.List (intercalate)
 import Data.Text (justifyLeft, center, pack, unpack)
 import Data.String.Utils (strip, rstrip)
 
-import Month (Year, Week, daysString, chunks, months)
+import Month (daysString, chunks, months)
+import Types
 
 type MonthRow = Int
 
@@ -29,7 +30,7 @@ pack20 :: String -> String
 pack20 = unpack . justifyLeft 20 ' ' . pack . rstrip
 
 threeMonthsWeekNumbers :: Week -> MonthRow -> Year -> String
-threeMonthsWeekNumbers week monthRow year =
+threeMonthsWeekNumbers (Week week) monthRow (Year year) =
   yearPadding [packedChunks ((monthRow * 3) - 2)
               ,packedChunks ((monthRow * 3) - 1)
               ,packedChunks (monthRow * 3)]
@@ -40,12 +41,12 @@ threeMonths monthRow year =
   yearNewLine
     [threeMonthHeader monthRow
     ,yearDaysOfWeek
-    ,threeMonthsWeekNumbers 1 monthRow year
-    ,threeMonthsWeekNumbers 2 monthRow year
-    ,threeMonthsWeekNumbers 3 monthRow year
-    ,threeMonthsWeekNumbers 4 monthRow year
-    ,threeMonthsWeekNumbers 5 monthRow year
-    ,threeMonthsWeekNumbers 6 monthRow year]
+    ,threeMonthsWeekNumbers (Week 1) monthRow year
+    ,threeMonthsWeekNumbers (Week 2) monthRow year
+    ,threeMonthsWeekNumbers (Week 3) monthRow year
+    ,threeMonthsWeekNumbers (Week 4) monthRow year
+    ,threeMonthsWeekNumbers (Week 5) monthRow year
+    ,threeMonthsWeekNumbers (Week 6) monthRow year]
 
 yearString :: Year -> String
 yearString year =

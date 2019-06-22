@@ -1,6 +1,7 @@
-module Day where
+module Day (zellers, firstDayOfMonth) where
 
 import Data.Ratio
+import Types
 
 -----------------------------------
 --
@@ -14,9 +15,9 @@ import Data.Ratio
 --
 ---------------------------
 
-zellers :: Int -> Int -> Int -> Int
-zellers day month year =
-       (day
+zellers :: Month -> Year -> Day -> DayOfWeek
+zellers (Month month) (Year year) (Day day) =
+       DayOfWeek $ (day
   +     floor ((month + 1) * 26 % 10)
   +     year
   +     floor (year % 4)
@@ -28,10 +29,10 @@ zellers day month year =
   `mod` 7
 
 -- firstDayOfMonth :: Integral a => a -> a -> a -> a
-firstDayOfMonth :: Int -> Int -> Int -> Int
-firstDayOfMonth day month year
-  | month <= 2 = zellers (month + 12) day (year - 1)
-  | otherwise = zellers day month year
+firstDayOfMonth :: Month -> Year -> Day -> DayOfWeek
+firstDayOfMonth (Month month) (Year year)
+  | month <= 2 = zellers (Month $ month + 12) (Year $ year - 1)
+  | otherwise = zellers (Month month) (Year year)
 
 -- Ruby implementaion...
 -- def zellers
