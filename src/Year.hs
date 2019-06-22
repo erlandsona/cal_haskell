@@ -12,7 +12,7 @@ yearPadding = intercalate "  "
 yearNewLine = intercalate "\n"
 
 titleString :: Year -> String
-titleString year = unpack . center 64 ' ' $ pack . strip . show $ year
+titleString (Year year) = unpack . center 64 ' ' $ pack . strip . show $ year
 
 spacerString, yearDaysOfWeek :: String
 spacerString = "                                                                "

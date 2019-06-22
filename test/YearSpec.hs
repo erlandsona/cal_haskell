@@ -4,6 +4,7 @@ import Test.Hspec (Spec, describe, hspec, it, parallel, shouldBe)
 import Data.List (intercalate)
 
 import Year
+import Types
 
 main :: IO ()
 main = hspec spec
@@ -13,7 +14,7 @@ spec = parallel $ describe "Year" $ do
 
   describe "titleString" $
     it "pads the year by 64 char" $
-      titleString 2016 `shouldBe` intercalate "\n" [
+      titleString (Year 2016) `shouldBe` intercalate "\n" [
         "                              2016                              "]
 
   describe "spacerString" $
@@ -67,37 +68,37 @@ spec = parallel $ describe "Year" $ do
   describe "threeMonthsWeekNumbers" $
     describe "should return a string of three months of numbers" $ do
       it "Week1 Row1 2016" $
-        threeMonthsWeekNumbers 1 1 2016
+        threeMonthsWeekNumbers (Week 1) 1 (Year 2016)
         `shouldBe`
         "                1  2      1  2  3  4  5  6         1  2  3  4  5"
       it "Week2 Row1 2016" $
-        threeMonthsWeekNumbers 2 1 2016
+        threeMonthsWeekNumbers (Week 2) 1 (Year 2016)
         `shouldBe`
         " 3  4  5  6  7  8  9   7  8  9 10 11 12 13   6  7  8  9 10 11 12"
       it "Week3 Row1 2016" $
-        threeMonthsWeekNumbers 3 1 2016
+        threeMonthsWeekNumbers (Week 3) 1 (Year 2016)
         `shouldBe`
         "10 11 12 13 14 15 16  14 15 16 17 18 19 20  13 14 15 16 17 18 19"
       it "Week4 Row1 2016" $
-        threeMonthsWeekNumbers 4 1 2016
+        threeMonthsWeekNumbers (Week 4) 1 (Year 2016)
         `shouldBe`
         "17 18 19 20 21 22 23  21 22 23 24 25 26 27  20 21 22 23 24 25 26"
       it "Week5 Row1 2016" $
-        threeMonthsWeekNumbers 5 1 2016
+        threeMonthsWeekNumbers (Week 5) 1 (Year 2016)
         `shouldBe`
         "24 25 26 27 28 29 30  28 29                 27 28 29 30 31      "
       it "Week6 Row1 2016" $
-        threeMonthsWeekNumbers 6 1 2016
+        threeMonthsWeekNumbers (Week 6) 1 (Year 2016)
         `shouldBe`
         "31                                                              "
       it "Week1 Row2 2016" $
-        threeMonthsWeekNumbers 1 2 2016
+        threeMonthsWeekNumbers (Week 1) 2 (Year 2016)
         `shouldBe`
         "                1  2   1  2  3  4  5  6  7            1  2  3  4"
 
   describe "yearString" $
     it "builds 2016" $
-      yearString 2016 `shouldBe` intercalate "\n" [
+      yearString (Year 2016) `shouldBe` intercalate "\n" [
         "                              2016                              ",
         "                                                                ",
         "       January              February                March       ",
