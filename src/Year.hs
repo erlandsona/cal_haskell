@@ -7,8 +7,6 @@ import Data.String.Utils (strip, rstrip)
 import Month (daysString, chunks, months)
 import Types
 
-type MonthRow = Int
-
 yearPadding, yearNewLine :: [String] -> String
 yearPadding = intercalate "  "
 yearNewLine = intercalate "\n"
@@ -30,11 +28,15 @@ pack20 :: String -> String
 pack20 = unpack . justifyLeft 20 ' ' . pack . rstrip
 
 threeMonthsWeekNumbers :: Week -> MonthRow -> Year -> String
-threeMonthsWeekNumbers (Week week) monthRow (Year year) =
-  yearPadding [packedChunks ((monthRow * 3) - 2)
-              ,packedChunks ((monthRow * 3) - 1)
-              ,packedChunks (monthRow * 3)]
-  where packedChunks m = pack20 $ chunks m year !! (week - 1)
+threeMonthsWeekNumbers (Week week) monthRow year =
+  yearPadding
+      [ packedChunks ((monthRow * 3) - 2)
+      , packedChunks ((monthRow * 3) - 1)
+      , packedChunks (monthRow * 3)
+      ]
+  where
+    packedChunks :: Int -> String
+    packedChunks m = pack20 $ chunks (Month m) year !! (week - 1)
 
 threeMonths :: MonthRow -> Year -> String
 threeMonths monthRow year =
