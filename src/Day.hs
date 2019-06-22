@@ -17,22 +17,24 @@ import Types
 
 zellers :: Month -> Year -> Day -> DayOfWeek
 zellers (Month month) (Year year) (Day day) =
-       DayOfWeek $ (day
-  +     floor ((month + 1) * 26 % 10)
-  +     year
-  +     floor (year % 4)
-  +     6
-  *     floor (year % 100)
-  +     floor (year % 400)
-  `mod` 7
-  +     6)
-  `mod` 7
+  DayOfWeek
+    $     (     day
+          +     floor ((month + 1) * 26 % 10)
+          +     year
+          +     floor (year % 4)
+          +     6
+          *     floor (year % 100)
+          +     floor (year % 400)
+          `mod` 7
+          +     6
+          )
+    `mod` 7
 
 -- firstDayOfMonth :: Integral a => a -> a -> a -> a
 firstDayOfMonth :: Month -> Year -> Day -> DayOfWeek
 firstDayOfMonth (Month month) (Year year)
   | month <= 2 = zellers (Month $ month + 12) (Year $ year - 1)
-  | otherwise = zellers (Month month) (Year year)
+  | otherwise  = zellers (Month month) (Year year)
 
 -- Ruby implementaion...
 -- def zellers
