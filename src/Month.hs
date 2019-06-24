@@ -10,24 +10,18 @@ columnWidth = 20
 padding = 3
 
 numOfDays :: Month -> Year -> Day
-numOfDays (Month month) (Year year)
-  | month == 2 = Day daysInFebruary
-  | month `elem` [4, 6, 9, 11] = Day 30
+numOfDays month (Year year)
+  | fromEnum month == 2 = Day daysInFebruary
+  | fromEnum month `elem` [4, 6, 9, 11] = Day 30
   | otherwise = Day 31
   where daysInFebruary
           | year `mod` 400 == 0 || year `mod` 4 == 0 && year `mod` 100 /= 0 = 29
           | otherwise = 28
 
-months :: [String]
-months = ["", "January", "February", "March",
-          "April", "May", "June", "July", "August",
-          "September", "October", "November", "December"]
-
 header :: Month -> Year -> String
-header (Month month) (Year year) = T.unpack .
-                    T.center 20 ' ' .
-                    T.pack $
-                    months !! month ++ " " ++ show year -- "Month Year"
+header month (Year year)
+  = T.unpack . T.center 20 ' ' . T.pack $ (show <$> months) !! (mnth -1) ++ " " ++ show year -- "Month Year"
+      where mnth = fromEnum month
 
 daysString :: String
 daysString = "Su Mo Tu We Th Fr Sa"

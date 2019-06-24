@@ -3,6 +3,18 @@ module Day (zellers, firstDayOfMonth) where
 import Data.Ratio
 import Types
 
+firstDayOfMonth :: Month -> Year -> Day -> DayOfWeek
+firstDayOfMonth month (Year year)
+  | fromEnum month <= 2 = zellers ((fromEnum month) + 12) (Year $ year - 1)
+  | otherwise = zellers (fromEnum month) (Year year)
+
+-- Ruby implementaion...
+-- def zellers
+--   @month += 12 and @year -= 1 if @month <= 2
+--   h = (@day + ((26 * (@month + 1)) / 10).floor + @year + (@year / 4).floor + (6 * (@year/100).floor) + (@year/400).floor) % 7
+--   ((h + 6) % 7)
+-- end
+
 -----------------------------------
 --
 -- The following method implements Zeller's Congruence an algorithm to determin what day of the week it is.
@@ -15,8 +27,8 @@ import Types
 --
 ---------------------------
 
-zellers :: Month -> Year -> Day -> DayOfWeek
-zellers (Month month) (Year year) (Day day) =
+zellers :: Int -> Year -> Day -> DayOfWeek
+zellers month (Year year) (Day day) =
        DayOfWeek $ (day
   +     floor ((month + 1) * 26 % 10)
   +     year
@@ -28,15 +40,4 @@ zellers (Month month) (Year year) (Day day) =
   +     6)
   `mod` 7
 
--- firstDayOfMonth :: Integral a => a -> a -> a -> a
-firstDayOfMonth :: Month -> Year -> Day -> DayOfWeek
-firstDayOfMonth (Month month) (Year year)
-  | month <= 2 = zellers (Month $ month + 12) (Year $ year - 1)
-  | otherwise = zellers (Month month) (Year year)
 
--- Ruby implementaion...
--- def zellers
---   @month += 12 and @year -= 1 if @month <= 2
---   h = (@day + ((26 * (@month + 1)) / 10).floor + @year + (@year / 4).floor + (6 * (@year/100).floor) + (@year/400).floor) % 7
---   ((h + 6) % 7)
--- end
