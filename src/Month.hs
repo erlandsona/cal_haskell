@@ -59,11 +59,16 @@ properlySpaced :: Month -> Year -> String
 properlySpaced month year = prefixDayOne month year ++
           concatMap (\(Day x) -> if x < 9 then ' ':show x ++ " " else ' ':show x) (numOfDaysArray month year)
 
+-- Blackbird combinator
+infixr 9 ...
+(...) :: (c -> d) -> (a -> b -> c) -> a -> b -> d
+(...) = (.) . (.)
+
 grid :: Month -> Year -> String
-grid month year = T.unpack . T.justifyLeft 124 ' ' . T.pack $ properlySpaced month year
+grid = T.unpack ... T.justifyLeft 124 ' ' ... T.pack ... properlySpaced
 
 chunks :: Month -> Year -> [String]
-chunks month year = arrOfWeeks $ grid month year
+chunks = arrOfWeeks ... grid
 
 monthNumbers :: Month -> Year -> String
 monthNumbers month year
