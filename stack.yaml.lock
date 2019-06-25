@@ -3,10 +3,24 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: polysemy-0.4.0.0@sha256:6dfd2070c9f1f8e64ba9fbeee2af59e2893cac8acb066c2c80cf6428e2ddcef9,4004
+    pantry-tree:
+      size: 2393
+      sha256: a68185ec207fcb34a9065171ff364427cfb76e006545fb363ca3da870d5ba792
+  original:
+    hackage: polysemy-0.4.0.0
+- completed:
+    hackage: th-abstraction-0.3.1.0@sha256:96042f6658f2dccfac03b33f0fd59f62b1f65b9b0a765d8a2ea6026f4081ee4a,1838
+    pantry-tree:
+      size: 583
+      sha256: ea48e150478824f88e1e8fc6baa4d23ee3cc1243ab2894dded8d61c9eaaa80ce
+  original:
+    hackage: th-abstraction-0.3.1.0
 snapshots:
 - completed:
-    size: 428787
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/6/35.yaml
-    sha256: f2ce58e96ad78750c355afc8fcd0bfbd06c8e1381050c59bc5c934577ebef872
-  original: lts-6.35
+    size: 499889
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/13/26.yaml
+    sha256: ecb02ee16829df8d7219e7d7fe6c310819820bf335b0b9534bce84d3ea896684
+  original: lts-13.26

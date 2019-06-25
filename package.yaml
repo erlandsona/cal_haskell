@@ -41,9 +41,24 @@ maintainer:          austin@erlandson.com
 # README.
 # extra-source-files:
 
+ghc-options: -O2 -flate-specialise -fspecialise-aggressively
+default-extensions:
+  - DataKinds
+  - FlexibleContexts
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - LambdaCase
+  - PolyKinds
+  - RankNTypes
+  - ScopedTypeVariables
+  - TypeApplications
+  - TypeOperators
+  - TypeFamilies
+
 dependencies:
-  - base >=4.8 && <4.9
+  - base
   - MissingH
+  - polysemy
   - text
 
 executables:
@@ -51,7 +66,6 @@ executables:
     main: Main.hs
     ghc-options: -Wall -Werror -O2
     source-dirs: src
-    extensions: GeneralizedNewtypeDeriving
 
 tests:
   spec:
