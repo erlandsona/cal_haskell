@@ -44,7 +44,9 @@ maintainer:          austin@erlandson.com
 ghc-options: -O2 -flate-specialise -fspecialise-aggressively
 default-extensions:
   - DataKinds
+  - DeriveFunctor
   - FlexibleContexts
+  - FlexibleInstances
   - GADTs
   - GeneralizedNewtypeDeriving
   - LambdaCase
